@@ -4,8 +4,10 @@
 
 :root {
   --background: #ffffff;
+  --background2: #efefef;
   --text-color: #171717;
   --accent: #57c102;
+  --accent2: #b1e781;
 }
 
 body {
@@ -14,13 +16,32 @@ body {
 /* styles/Form.module.css */
 .container {
   padding: 20px;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 40px auto;
   background-color: var(--background);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.hero {
+  background: url("/hero.png") center no-repeat;
+  height: 800px;
+  width: 100%;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.heroText {
+  font-size: 60px;
+  color: #47443b;
+  font-weight: bold;
+  flex: 1;
+}
+.heroSubtext {
+  font-size: 30px;
+  color: #47443b;
+  font-weight: bold;
+  flex: 1;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -31,14 +52,14 @@ body {
   background-color: var(--background);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);*/
 }
 
 h2 {
   color: var(--accent); /* Match the green color from the image */
   font-size: 45px;
   margin-bottom: 20px;
-  font-family: "Roboto";
+  font-weight: 700;
 }
 
 .grid {
@@ -47,10 +68,48 @@ h2 {
   gap: 20px;
 }
 
-.inputGroup, .radioGroup, .checkboxGroup {
+.inputGroup {
   display: flex;
   flex-direction: column;
+  background-color: var(--background2);
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
 }
+.inputGroupGreen {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--accent);
+  color: var(--background);
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  padding: 14px;
+}
+.inputGroupGreen::placeholder {
+  color: var(--background)
+}
+.propertyText {
+  margin-top: 22px;
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+
+/*.radioGroup, .checkboxGroup {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  background-color: var(--background2);*/
+/*  padding-top: 20px;*/
+/*  padding-bottom: 20px;*/
+/*  justify-content: space-around;*/
+/*  align-items: center;*/
+/*}*/
 
 .label {
   font-weight: bold;
@@ -63,8 +122,27 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-.radioLabel, .checkboxLabel {
+.radioDiscount {
+  padding: 12px;
+  border: 1px dashed;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.radioDiscountHighlight {
+  background-color: #57c102;
+  border: none;
+  color: var(--background);
+}
+.radioFrequency {
+  font-weight: normal;
+  flex-grow: 1;
+  margin-bottom: 30px;
+  text-align: center;
+  white-space: pre-wrap;
+  flex: 1;
+}
+.checkboxLabel {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -75,9 +153,9 @@ h2 {
   border: 1px solid #ddd;
 }
 
-.radioLabel:hover, .checkboxLabel:hover {
-  background-color: var(--background);
-}
+/*.radioLabel:hover, .checkboxLabel:hover {*/
+/*  background-color: var(--background);*/
+/*}*/
 
 .quote {
   font-size: 1.2rem;
@@ -103,3 +181,138 @@ h2 {
 .submitButton:focus {
   outline: none;
 }
+.extras-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 64px;
+}
+.yellow {
+  color: #f3a22d;
+}
+
+.extras-icon {
+  color: var(--accent);
+}
+
+.extras-option {
+  border-color: var(--background);
+  background-color: var(--background2);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  flex: 1 0 calc(25% - 10px); /* 5 items on desktop */
+  box-sizing: border-box; /* Include padding and borders in the element's total width */
+}
+
+/* Tablet: 3 items */
+@media (max-width: 1024px) {
+  .extras-option {
+    flex: 1 0 calc(30% - 10px); /* 3 items on tablet */
+  }
+}
+
+/* Mobile: 2 items */
+@media (max-width: 768px) {
+  .extras-option {
+    flex: 1 0 calc(50% - 10px); /* 2 items on mobile */
+  }
+}
+
+.radioGroup {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+  gap: 20px; /* Space between grid items */
+  background-color: var(--background2);
+  padding: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--background);
+  border: 1px solid #ddd;
+  font-size: 24px;
+  font-weight: bold;
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.selected {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--background);
+}
+
+/* Tablet: 4 items */
+@media (max-width: 1024px) {
+  .radioGroup {
+    grid-template-columns: repeat(4, 1fr); /* Still 4 columns */
+  }
+}
+
+/* Mobile: 2 items */
+@media (max-width: 768px) {
+  .radioGroup {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  }
+}
+
+
+.room-selector {
+  position: relative;
+  display: inline-block; /* Allow it to shrink/grow based on content */
+  cursor: pointer; /* Indicate it's clickable */
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/*.room-selector:hover,*/
+/*.room-selector:focus {*/
+/*  background-color: #e0e0e0; !* Change background color on hover/focus *!*/
+/*}*/
+
+.inputGroup {
+  display: flex;
+  justify-content: center; /* Center text */
+  align-items: center;
+}
+
+.buttonGroup {
+  position: absolute; /* Position buttons relative to the parent */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Offset for vertical centering */
+  display: flex;
+  width: 100%; /* Take full width of parent */
+  justify-content: space-between; /* Space buttons evenly */
+  /*transition: opacity 0.3s ease; !* Smooth transition for opacity *!*/
+}
+
+/*.room-selector:hover .buttonGroup,*/
+/*.room-selector:focus-within .buttonGroup {*/
+/*  opacity: 1; !* Show buttons on hover or when focused *!*/
+/*}*/
+
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /*display: none;*/
+}
+
+/*button:hover {*/
+/*  display: initial;*/
+/*}*/
