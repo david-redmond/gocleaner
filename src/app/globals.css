@@ -52,7 +52,6 @@ body {
   background-color: var(--background);
   padding: 20px;
   border-radius: 10px;
-  /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);*/
 }
 
 h2 {
@@ -63,9 +62,9 @@ h2 {
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 10px
 }
 
 .inputGroup {
@@ -79,18 +78,11 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 14px;
+  flex: 1;
 }
-.inputGroupGreen {
-  display: flex;
-  flex-direction: column;
+.inputGroup-selected {
   background-color: var(--accent);
   color: var(--background);
-  font-size: 20px;
-  font-weight: 700;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  padding: 14px;
 }
 .inputGroupGreen::placeholder {
   color: var(--background)
@@ -206,20 +198,6 @@ h2 {
   box-sizing: border-box; /* Include padding and borders in the element's total width */
 }
 
-/* Tablet: 3 items */
-@media (max-width: 1024px) {
-  .extras-option {
-    flex: 1 0 calc(30% - 10px); /* 3 items on tablet */
-  }
-}
-
-/* Mobile: 2 items */
-@media (max-width: 768px) {
-  .extras-option {
-    flex: 1 0 calc(50% - 10px); /* 2 items on mobile */
-  }
-}
-
 .radioGroup {
   display: grid; /* Use grid layout */
   grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
@@ -248,36 +226,23 @@ h2 {
   transform: scale(1)
 }
 
-/* Tablet: 4 items */
-@media (max-width: 1024px) {
-  .radioGroup {
-    grid-template-columns: repeat(4, 1fr); /* Still 4 columns */
-  }
-}
-
-/* Mobile: 2 items */
-@media (max-width: 768px) {
-  .radioGroup {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
-  }
-}
-
-
 .room-selector {
   position: relative;
-  display: inline-block; /* Allow it to shrink/grow based on content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer; /* Indicate it's clickable */
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  background-color: var(--background2);
+  width: 33%;
 }
 
-/*.room-selector:hover,*/
-/*.room-selector:focus {*/
-/*  background-color: #e0e0e0; !* Change background color on hover/focus *!*/
-/*}*/
+
+.room-selector > div {
+  display: flex;
+  justify-content: center; /* Center text */
+  align-items: center;
+  width: 50%;
+}
 
 .inputGroup {
   display: flex;
@@ -290,27 +255,46 @@ h2 {
   top: 50%; /* Center vertically */
   transform: translateY(-50%); /* Offset for vertical centering */
   display: flex;
-  width: 100%; /* Take full width of parent */
+  width: 80%; /* Take full width of parent */
   justify-content: space-between; /* Space buttons evenly */
-  /*transition: opacity 0.3s ease; !* Smooth transition for opacity *!*/
 }
 
-/*.room-selector:hover .buttonGroup,*/
-/*.room-selector:focus-within .buttonGroup {*/
-/*  opacity: 1; !* Show buttons on hover or when focused *!*/
-/*}*/
 
-button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+.button {
+  color: var(--accent);
   cursor: pointer;
-  transition: background-color 0.3s;
-  /*display: none;*/
+  font-size: 34px;
 }
 
 /*button:hover {*/
 /*  display: initial;*/
 /*}*/
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .radioGroup {
+    grid-template-columns: repeat(4, 1fr); /* Still 4 columns */
+  }
+  .extras-option {
+    flex: 1 0 calc(30% - 10px); /* 3 items on tablet */
+  }
+}
+
+/* Mobile  */
+@media (max-width: 768px) {
+  .radioGroup {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  }
+  .room-selector {
+    width: 100%;
+  }
+  .extras-option {
+    flex: 1 0 calc(50% - 10px); /* 2 items on mobile */
+  }
+  .grid {
+    flex-direction: column; /* Stack items vertically on mobile */
+  }
+  .section {
+    padding: 0px;
+  }
+}

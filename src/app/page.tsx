@@ -1,4 +1,11 @@
-import Image from "next/image";
+"use client"
+import React from "react";
+import HomeSection from "@/components/HomeSection";
+import HeroSection from "@/components/HeroSection";
+import DiscountsSection from "@/components/DiscountsSection";
+import Extras from "@/components/Extras";
+import {IFrequency, IPropertyState} from "@/app/interfaces";
+
 
 export default function Home() {
   return (
