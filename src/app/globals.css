@@ -153,10 +153,6 @@ h2 {
   border: 1px solid #ddd;
 }
 
-/*.radioLabel:hover, .checkboxLabel:hover {*/
-/*  background-color: var(--background);*/
-/*}*/
-
 .quote {
   font-size: 1.2rem;
   font-weight: bold;
@@ -242,12 +238,14 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   box-sizing: border-box; /* Include padding and border in width calculation */
+  transform: scale(0.9)
 }
 
 .selected {
   background-color: var(--accent);
   border-color: var(--accent);
   color: var(--background);
+  transform: scale(1)
 }
 
 /* Tablet: 4 items */
