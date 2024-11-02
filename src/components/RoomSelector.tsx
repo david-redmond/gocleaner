@@ -1,7 +1,13 @@
 import React from "react";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-const RoomSelector = ({ value, setRooms, title }) => {
+
+interface IProps {
+  value: number;
+  setRooms: (arg: number) => void;
+  title: string;
+}
+const RoomSelector = ({ value, setRooms, title }: IProps) => {
   const [isEditing, setIsEditing] = React.useState(false); // State to toggle button visibility
 
   // Function to increment rooms
@@ -15,7 +21,7 @@ const RoomSelector = ({ value, setRooms, title }) => {
   };
 
   // Handle keyboard interactions for accessibility
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: any) => {
     if (event.key === "Enter" || event.key === " ") {
       setIsEditing(true);
     }
