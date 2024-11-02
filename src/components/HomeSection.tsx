@@ -7,8 +7,9 @@ interface IProps {
   eircode: string;
   setProperty: (arg: IPropertyState) => void;
   setEircode: (eircode: string) => void;
+  setFrequency: (arg: string) => void;
 }
-export default ({ property, eircode, setProperty, setEircode }: IProps) => {
+export default ({ property, eircode, setProperty, setEircode, setFrequency }: IProps) => {
   return (
     <section className={"section"}>
       <h2>Your Home</h2>
@@ -66,7 +67,10 @@ export default ({ property, eircode, setProperty, setEircode }: IProps) => {
               ? "inputGroup inputGroup-selected"
               : "inputGroup"
           }
-          onClick={() => setProperty({ ...property, type: "moving" })}
+          onClick={() => {
+              setProperty({ ...property, type: "moving" })
+              setFrequency('once-off')
+          }}
         >
           Moving Out
         </div>
