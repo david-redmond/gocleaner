@@ -17,7 +17,7 @@ export default ({ allExtras, handleSelectExtra }: IProps) => {
                   ? "extras-option selected"
                   : "extras-option"
               }
-              key={index}
+              key={opt.name}
               onClick={() => handleSelectExtra(opt)}
             >
               {opt.icon}

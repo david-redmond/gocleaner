@@ -13,7 +13,9 @@ import MicrowaveOutlinedIcon from "@mui/icons-material/MicrowaveOutlined";
 import DoorBackOutlinedIcon from "@mui/icons-material/DoorBackOutlined";
 import KitchenOutlinedIcon from "@mui/icons-material/KitchenOutlined";
 import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
-import BlindsOutlinedIcon from '@mui/icons-material/BlindsOutlined';
+import BlindsOutlinedIcon from "@mui/icons-material/BlindsOutlined";
+import Modal from "@/components/Modal";
+import UserForm from "@/components/CustomerForm";
 export default function Home() {
   const extrasArray: IExtras[] = [
     {
@@ -80,7 +82,10 @@ export default function Home() {
   const [eircode, setEircode] = React.useState<string>("");
   const [frequency, setFrequency] = React.useState<IFrequency>("onceWeek");
   const [allExtras, setExtras] = React.useState<IExtras[]>(extrasArray);
+  const [isModalOpen, setModalOpen] = React.useState(false);
 
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   const handleSelectExtra = (option: IExtras) => {
     const newArray = allExtras.map((opt) => {
       if (opt.name === option.name) {
@@ -90,7 +95,6 @@ export default function Home() {
     });
     setExtras(newArray);
   };
-
   return (
     <>
       <HeroSection />
@@ -107,7 +111,7 @@ export default function Home() {
 
           {/* Your Schedule Section */}
           <section className={"section"}>
-            <h2>Time that suites you</h2>
+            <h2>Pick a time</h2>
             <div className={"grid"}>
               <div className={"inputGroup"}>
                 <label>Date</label>
@@ -147,7 +151,11 @@ export default function Home() {
             property={property}
             frequency={frequency}
             allExtras={allExtras}
+            confirmPurchase={openModal}
           />
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <UserForm />
+          </Modal>
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-import {IFrequency, IPropertyState} from "@/app/interfaces";
+import { IFrequency, IPropertyState } from "@/app/interfaces";
 import RoomSelector from "./RoomSelector";
 
 interface IProps {
@@ -9,7 +9,13 @@ interface IProps {
   setEircode: (eircode: string) => void;
   setFrequency: (arg: IFrequency) => void;
 }
-export default ({ property, eircode, setProperty, setEircode, setFrequency }: IProps) => {
+export default ({
+  property,
+  eircode,
+  setProperty,
+  setEircode,
+  setFrequency,
+}: IProps) => {
   return (
     <section className={"section"}>
       <h2>Your Home</h2>
@@ -34,7 +40,10 @@ export default ({ property, eircode, setProperty, setEircode, setFrequency }: IP
           className={"inputGroup"}
           placeholder={"Please provide your eircode"}
           autoFocus
-          onClick={(e: any) => setEircode(e.nativeEvent.value)}
+          onChange={(e: any) => {
+            const { value } = e.target;
+            setEircode(value);
+          }}
         />
       </div>
       <div className={"propertyText"}>
@@ -68,8 +77,8 @@ export default ({ property, eircode, setProperty, setEircode, setFrequency }: IP
               : "inputGroup"
           }
           onClick={() => {
-              setProperty({ ...property, type: "moving" })
-              setFrequency('once-off')
+            setProperty({ ...property, type: "moving" });
+            setFrequency("once-off");
           }}
         >
           Moving Out

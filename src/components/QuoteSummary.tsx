@@ -6,8 +6,9 @@ interface IProps {
     property: IPropertyState;
     frequency: IFrequency
     allExtras: IExtras[];
+    confirmPurchase: () => void;
 }
-function QuoteSummary({property, frequency, allExtras}: IProps) {
+function QuoteSummary({property, frequency, allExtras, confirmPurchase}: IProps) {
     const SubTotal = calculateSubtotal(property, frequency);
     const totalExtras = calculateTotalExtras(allExtras);
     const [total, setTotal] = React.useState(SubTotal.subtotal + totalExtras);
@@ -29,7 +30,7 @@ function QuoteSummary({property, frequency, allExtras}: IProps) {
                 {allExtras.map((extra: IExtras, index: number) => {
                     if (extra.selected) {
                         return (
-                            <div className={"quoteItem"}>
+                            <div className={"quoteItem"} key={extra.name}>
                                 <p>{extra.name}</p>
                                 <p>€{Number(extra.price).toFixed(2)}</p>
                             </div>
@@ -42,8 +43,8 @@ function QuoteSummary({property, frequency, allExtras}: IProps) {
                     <p>Total</p>
                     <p>€{Number(total).toFixed(2)}</p>
                 </div>
-                <button type="submit" className={"submitButton"}>
-                    Pay on the Day
+                <button onClick={confirmPurchase} className={"submitButton"}>
+                    Confirm, Pay on the Day
                 </button>
             </div>
         </section>
