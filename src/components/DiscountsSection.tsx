@@ -33,7 +33,9 @@ export default ({ property, frequency, setFrequency }: IProps) => {
           }
           onClick={() => setFrequency("onceWeek")}
         >
-          <div className={"radioDiscount radioDiscountHighlight"}>-{discounts.onceWeek}%</div>
+          <div className={"radioDiscount radioDiscountHighlight"}>
+            -{discounts.onceWeek}%
+          </div>
           <div className={"radioFrequency"}>Once a week</div>
           <div className={"radioPrice"}>
             €{Number(SubTotal.onceWeek).toFixed(2)}

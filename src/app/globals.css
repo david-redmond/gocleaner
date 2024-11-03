@@ -109,16 +109,6 @@ h2 {
   font-size: 22px;
 }
 
-/*.radioGroup, .checkboxGroup {*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  background-color: var(--background2);*/
-/*  padding-top: 20px;*/
-/*  padding-bottom: 20px;*/
-/*  justify-content: space-around;*/
-/*  align-items: center;*/
-/*}*/
-
 .label {
   font-weight: bold;
   margin-bottom: 5px;
@@ -185,6 +175,10 @@ h2 {
   cursor: pointer;
   width: 100%;
   margin-top: 20px;
+}
+.submitButton:disabled {
+  background-color: #57c102c2;
+  cursor: not-allowed;
 }
 
 .submitButton:hover {
@@ -313,7 +307,9 @@ h2 {
   padding: 14px;
   flex: 1;
 }
-
+.noEircode {
+  color: red;
+}
 /* Tablet */
 @media (max-width: 1024px) {
   .radioGroup {
@@ -327,7 +323,7 @@ h2 {
 /* Mobile  */
 @media (max-width: 768px) {
   .radioGroup {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    grid-template-columns: repeat(1, 1fr); /* 2 columns on mobile */
   }
   .room-selector {
     width: 100%;
@@ -349,6 +345,7 @@ h2 {
     flex-direction: column;
   }
 }
+
 
 .modal-overlay {
   position: fixed;

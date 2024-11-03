@@ -12,6 +12,7 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
   const SubTotal = calculateSubtotal(property, frequency);
   const totalExtras = calculateTotalExtras(allExtras);
   const [total, setTotal] = React.useState(SubTotal.subtotal + totalExtras);
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(true);
   const [user, setUser] = React.useState({
     firstname: "",
     surname: "",
@@ -20,9 +21,13 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
   });
   React.useEffect(() => {
     setTotal(SubTotal.subtotal + totalExtras);
+    setIsDisabled(!user.email || !user.phone || !user.firstname || !user.surname)
   });
 
   const handleSubmitOrder = () => {
+    if(!user.email || !user.phone || !user.firstname || !user.surname) {
+      return;
+    }
     const additionalOptions = allExtras
       .map((opt) => {
         if (opt.selected) {
@@ -70,6 +75,7 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
       <h2>Your Quote</h2>
       <div className={"quoteBox"}>
         <p>Your cleaning is scheduled for Dec 20th, 11:00am</p>
+        <p className={eircode ? "" : "noEircode"}>{eircode ? `Your Eircode is ${eircode}` : "Please add your Eircode above."}</p>
         <div className={"quoteItem"}>
           <p>
             Full {property.type} cleaning, including {property.bed} Bedrooms and{" "}
@@ -122,7 +128,7 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
             onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
         </div>
-        <button onClick={handleSubmitOrder} className={"submitButton"}>
+        <button onClick={handleSubmitOrder} className={"submitButton"} disabled={isDisabled}>
           Confirm & Pay on the Day
         </button>
       </div>
