@@ -292,9 +292,27 @@ h2 {
   font-size: 34px;
 }
 
-/*button:hover {*/
-/*  display: initial;*/
-/*}*/
+.userInputGroup {
+  width: 100%;
+  display: flex;
+  background-color: var(--background2);
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.userInputGroup > input {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  flex: 1;
+}
 
 /* Tablet */
 @media (max-width: 1024px) {
@@ -325,6 +343,10 @@ h2 {
   }
   .logo {
     left: 0;
+  }
+
+  .userInputGroup {
+    flex-direction: column;
   }
 }
 

@@ -26,6 +26,7 @@ export default ({
           setRooms={(newValue: number) =>
             setProperty({ ...property, bed: newValue })
           }
+          autofocus
         />
         <RoomSelector
           title={"Bathrooms"}

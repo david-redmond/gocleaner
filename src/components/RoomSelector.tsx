@@ -6,9 +6,10 @@ interface IProps {
   value: number;
   setRooms: (arg: number) => void;
   title: string;
+  autofocus?: boolean;
 }
-const RoomSelector = ({ value, setRooms, title }: IProps) => {
-  const [isEditing, setIsEditing] = React.useState(false); // State to toggle button visibility
+const RoomSelector = ({ value, setRooms, title, autofocus }: IProps) => {
+  const [isEditing, setIsEditing] = React.useState(autofocus); // State to toggle button visibility
 
   // Function to increment rooms
   const incrementRooms = () => {
