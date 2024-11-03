@@ -1,14 +1,10 @@
-"use client"
+"use client";
 import React from "react";
 import HomeSection from "@/components/HomeSection";
 import HeroSection from "@/components/HeroSection";
 import DiscountsSection from "@/components/DiscountsSection";
 import Extras from "@/components/Extras";
-import {
-  IExtras,
-  IFrequency,
-  IPropertyState
-} from "@/app/interfaces";
+import { IExtras, IFrequency, IPropertyState } from "@/app/interfaces";
 import QuoteSummary from "@/components/QuoteSummary";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
@@ -87,14 +83,14 @@ export default function Home() {
   const [allExtras, setExtras] = React.useState<IExtras[]>(extrasArray);
 
   const handleSelectExtra = (option: IExtras) => {
-    const newArray = allExtras.map(opt => {
+    const newArray = allExtras.map((opt) => {
       if (opt.name === option.name) {
-        opt.selected = !opt.selected
-      };
+        opt.selected = !opt.selected;
+      }
       return opt;
-    })
+    });
     setExtras(newArray);
-  }
+  };
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -175,8 +171,12 @@ export default function Home() {
           />
 
           {/* Quote Section */}
-          <QuoteSummary property={property} frequency={frequency} />
-        </form>
+          <QuoteSummary
+            property={property}
+            frequency={frequency}
+            allExtras={allExtras}
+          />
+        </div>
       </div>
     </>
   );

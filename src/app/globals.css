@@ -142,11 +142,15 @@ h2 {
   margin-bottom: 10px;
   background-color: var(--background);
 }
+.quoteBox {
+  background-color: var(--background2);
+  padding: 20px;
+}
 .quoteItem {
   display: flex;
   justify-content: space-between;
 }
-.quote {
+.total {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
@@ -161,6 +165,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  margin-top: 20px;
 }
 
 .submitButton:hover {
