@@ -13,8 +13,7 @@ import MicrowaveOutlinedIcon from "@mui/icons-material/MicrowaveOutlined";
 import DoorBackOutlinedIcon from "@mui/icons-material/DoorBackOutlined";
 import KitchenOutlinedIcon from "@mui/icons-material/KitchenOutlined";
 import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
-import KitchenTwoToneIcon from "@mui/icons-material/KitchenTwoTone";
-
+import BlindsOutlinedIcon from '@mui/icons-material/BlindsOutlined';
 export default function Home() {
   const extrasArray: IExtras[] = [
     {
@@ -68,14 +67,14 @@ export default function Home() {
     },
     {
       name: "Clean Venetian Blinds (each)",
-      icon: <KitchenTwoToneIcon className={"icon extras-icon"} />,
+      icon: <BlindsOutlinedIcon className={"icon extras-icon"} />,
       price: 7,
       selected: false,
     },
   ];
   const [property, setProperty] = React.useState<IPropertyState>({
-    bed: 1,
-    bath: 1,
+    bed: 3,
+    bath: 2,
     type: "house",
   });
   const [eircode, setEircode] = React.useState<string>("");
@@ -93,82 +92,55 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <HeroSection />
+      <div className={"container"}>
+        <div className={"form"}>
+          {/* Your Home Section */}
+          <HomeSection
+            property={property}
+            eircode={eircode}
+            setProperty={setProperty}
+            setEircode={setEircode}
+            setFrequency={setFrequency}
+          />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+          {/* Your Schedule Section */}
+          <section className={"section"}>
+            <h2>Time that suites you</h2>
+            <div className={"grid"}>
+              <div className={"inputGroup"}>
+                <label>Date</label>
+                <input type="date" name="date" required className={"input"} />
+              </div>
+              <div className={"inputGroup"}>
+                <label>Time</label>
+                <select name="timeSlot" required className={"select"}>
+                  <option value="7:00">7:00</option>
+                  <option value="8:00">8:00</option>
+                  <option value="9:00">9:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          {/* Discounts Section */}
+          {property.type !== "moving" && (
+            <DiscountsSection
+              property={property}
+              frequency={frequency}
+              setFrequency={setFrequency}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
+          )}
+
+          {/* Extras Section */}
+          <Extras allExtras={allExtras} handleSelectExtra={handleSelectExtra} />
+
+          {/* Additional Options Section*/}
+          {/* <AddtionalOptions />*/}
 
           {/* Quote Section */}
           <QuoteSummary
