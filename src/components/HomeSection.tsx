@@ -1,5 +1,5 @@
 import React from "react";
-import { IPropertyState } from "@/app/interfaces";
+import {IFrequency, IPropertyState} from "@/app/interfaces";
 import RoomSelector from "./RoomSelector";
 
 interface IProps {
@@ -7,7 +7,7 @@ interface IProps {
   eircode: string;
   setProperty: (arg: IPropertyState) => void;
   setEircode: (eircode: string) => void;
-  setFrequency: (arg: string) => void;
+  setFrequency: (arg: IFrequency) => void;
 }
 export default ({ property, eircode, setProperty, setEircode, setFrequency }: IProps) => {
   return (
