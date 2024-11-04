@@ -1,14 +1,24 @@
 import React from "react";
 import { IExtras, IFrequency, IPropertyState } from "@/app/interfaces";
 import calculateSubtotal from "@/app/utils/calculateSubtotal";
+import { useRouter } from 'next/navigation';
 
 interface IProps {
   property: IPropertyState;
   frequency: IFrequency;
   allExtras: IExtras[];
   eircode: string;
+  day: string;
+  time: string;
 }
-function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
+function QuoteSummary({
+  property,
+  frequency,
+  allExtras,
+  eircode,
+  day,
+  time,
+}: IProps) {
   const SubTotal = calculateSubtotal(property, frequency);
   const totalExtras = calculateTotalExtras(allExtras);
   const [total, setTotal] = React.useState(SubTotal.subtotal + totalExtras);
@@ -19,15 +29,41 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
     phone: "",
     email: "",
   });
+  const router = useRouter();
+
   React.useEffect(() => {
     setTotal(SubTotal.subtotal + totalExtras);
-    setIsDisabled(!user.email || !user.phone || !user.firstname || !user.surname)
+    setIsDisabled(
+      !user.email || !user.phone || !user.firstname || !user.surname,
+    );
   });
 
-  const handleSubmitOrder = () => {
-    if(!user.email || !user.phone || !user.firstname || !user.surname) {
+  async function postData(url = '', data = {}) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST', // Specify the request method
+        headers: {
+          'Content-Type': 'application/json', // Set the content type
+        },
+        body: JSON.stringify(data), // Convert the data object to a JSON string
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json(); // Parse the JSON response
+      router.push('/confirmation');
+      return result; // Return the result
+    } catch (error) {
+      console.error('Error:', error); // Log any errors
+    }
+  }
+  const handleSubmitOrder = async () => {
+    if (!user.email || !user.phone || !user.firstname || !user.surname) {
       return;
     }
+
     const additionalOptions = allExtras
       .map((opt) => {
         if (opt.selected) {
@@ -44,8 +80,8 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
       paymentMethod: "cash",
       customer: user,
       timeslot: {
-        day: "mon",
-        time: "9.00",
+        day,
+        time,
         frequency,
       },
       basket: {
@@ -68,14 +104,26 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
     console.log("Order **********");
     console.log(orderPayload);
     console.log("Order END **********");
+
+    await postData('https://gateway.project-frida.online/storefront/gocleaner/checkout', orderPayload)
   };
 
   return (
     <section className={"section"}>
       <h2>Your Quote</h2>
       <div className={"quoteBox"}>
-        <p>Your cleaning is scheduled for Dec 20th, 11:00am</p>
-        <p className={eircode ? "" : "noEircode"}>{eircode ? `Your Eircode is ${eircode}` : "Please add your Eircode above."}</p>
+        {frequency === "once-off" ? (
+          <p>Your cleaning is scheduled for Dec 20th, 11:00am</p>
+        ) : (
+          <p>
+            Your cleaning is scheduled for every {frequency === 'twiceWeek' ? "second" : frequency === "onceMonth" ? "forth" : "" } {day} at {time}.
+          </p>
+        )}
+        <p className={eircode ? "" : "noEircode"}>
+          {eircode
+            ? `Your Eircode is ${eircode}`
+            : "Please add your Eircode above."}
+        </p>
         <div className={"quoteItem"}>
           <p>
             Full {property.type} cleaning, including {property.bed} Bedrooms and{" "}
@@ -84,7 +132,7 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
           <p>€{Number(SubTotal.subtotal).toFixed(2)}</p>
         </div>
 
-        {allExtras.map((extra: IExtras, index: number) => {
+        {allExtras.map((extra: IExtras) => {
           if (extra.selected) {
             return (
               <div className={"quoteItem"} key={extra.name}>
@@ -128,7 +176,11 @@ function QuoteSummary({ property, frequency, allExtras, eircode }: IProps) {
             onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
         </div>
-        <button onClick={handleSubmitOrder} className={"submitButton"} disabled={isDisabled}>
+        <button
+          onClick={handleSubmitOrder}
+          className={"submitButton"}
+          disabled={isDisabled}
+        >
           Confirm & Pay on the Day
         </button>
       </div>

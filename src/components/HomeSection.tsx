@@ -39,7 +39,7 @@ export default ({
           type="text"
           value={eircode}
           className={"inputGroup"}
-          placeholder={"Please provide your eircode"}
+          placeholder={"Enter your eircode"}
           autoFocus
           onChange={(e: any) => {
             const { value } = e.target;

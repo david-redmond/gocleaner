@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import PageLayout from './layout';
 import HomeSection from "@/components/HomeSection";
 import HeroSection from "@/components/HeroSection";
 import DiscountsSection from "@/components/DiscountsSection";
@@ -14,6 +15,7 @@ import DoorBackOutlinedIcon from "@mui/icons-material/DoorBackOutlined";
 import KitchenOutlinedIcon from "@mui/icons-material/KitchenOutlined";
 import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
 import BlindsOutlinedIcon from "@mui/icons-material/BlindsOutlined";
+import Timeslot from "@/components/Timeslot";
 
 export default function Home() {
   const extrasArray: IExtras[] = [
@@ -79,6 +81,8 @@ export default function Home() {
     type: "house",
   });
   const [eircode, setEircode] = React.useState<string>("");
+  const [time, setTime] = React.useState<string>("8:00");
+  const [day, setDay] = React.useState<string>("Monday");
   const [frequency, setFrequency] = React.useState<IFrequency>("onceWeek");
   const [allExtras, setExtras] = React.useState<IExtras[]>(extrasArray);
 
@@ -93,7 +97,7 @@ export default function Home() {
   };
 
   return (
-    <>
+    <PageLayout>
       <HeroSection />
       <div className={"container"}>
         <div className={"form"}>
@@ -106,28 +110,6 @@ export default function Home() {
             setFrequency={setFrequency}
           />
 
-          {/* Your Schedule Section */}
-          <section className={"section"}>
-            <h2>Pick a time</h2>
-            <div className={"grid"}>
-              <div className={"inputGroup"}>
-                <label>Date</label>
-                <input type="date" name="date" required className={"input"} />
-              </div>
-              <div className={"inputGroup"}>
-                <label>Time</label>
-                <select name="timeSlot" required className={"select"}>
-                  <option value="7:00">7:00</option>
-                  <option value="8:00">8:00</option>
-                  <option value="9:00">9:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                </select>
-              </div>
-            </div>
-          </section>
-
           {/* Discounts Section */}
           {property.type !== "moving" && (
             <DiscountsSection
@@ -136,6 +118,15 @@ export default function Home() {
               setFrequency={setFrequency}
             />
           )}
+
+          {/* Your Schedule Section */}
+          <Timeslot
+            time={time}
+            setTime={setTime}
+            frequency={frequency}
+            day={day}
+            setDay={setDay}
+          />
 
           {/* Extras Section */}
           <Extras allExtras={allExtras} handleSelectExtra={handleSelectExtra} />
@@ -149,9 +140,11 @@ export default function Home() {
             frequency={frequency}
             allExtras={allExtras}
             eircode={eircode}
+            day={day}
+            time={time}
           />
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 }

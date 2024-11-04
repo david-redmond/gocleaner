@@ -10,7 +10,7 @@ export default ({ allExtras, handleSelectExtra }: IProps) => {
     <section className={"section"}>
       <h2>Extras</h2>
       <div className={"extras-box"}>
-        {allExtras.map((opt, index) => {
+        {allExtras.map((opt) => {
           return (
             <div
               className={opt.selected
