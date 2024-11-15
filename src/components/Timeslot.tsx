@@ -20,33 +20,37 @@ function Timeslot({ time, setTime, frequency, day, setDay }: IProps) {
             <input type="date" name="date" required className={"input"} />
           </div>
         ) : (
-          <div className={"dateInputGroup"}>
-          <div>Day</div>
-              <select
-                  name="day"
-                  required
-                  className={"select"}
-                  value={day}
-                  onChange={(e) => setDay(e.target.value)}
-              >
-                  <option value="Monday">Monday</option>
-                  <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday">Wednesday</option>
-                  <option value="Thursday">Thursday</option>
-                  <option value="Friday">Friday</option>
-                  <option value="Saturday">Saturday</option>
-                  <option value="Sunday">Sunday</option>
-              </select>
+          <div className="dateInputGroup">
+            <label htmlFor="daySelect">Day</label>
+            <select
+              id="daySelect"
+              name="day"
+              required
+              className="select"
+              value={day}
+              onChange={(e) => setDay(e.target.value)}
+              aria-label="Select a day of the week when the cleaning should take place."
+            >
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
           </div>
         )}
-        <div className={"dateInputGroup"}>
-        <div>Time</div>
+        <div className="dateInputGroup">
+          <label htmlFor="timeSlotSelect">Time</label>
           <select
+            id="timeSlotSelect"
             name="timeSlot"
             required
-            className={"select"}
+            className="select"
             value={time}
             onChange={(e) => setTime(e.target.value)}
+            aria-label="Select a time slot"
           >
             <option value="8:00">8:00</option>
             <option value="9:00">9:00</option>

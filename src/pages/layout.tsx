@@ -3,6 +3,8 @@ import "../app/globals.css";
 import React from "react";
 import Head from "next/head";
 import { areasCovered } from "@/constants";
+import Link from "next/link";
+import {Box, Typography} from "@mui/material";
 
 export default function RootLayout({
   children,
@@ -84,6 +86,10 @@ export default function RootLayout({
         </script>`}
       </Head>
       {children}
+      <Box component="footer" py={4} textAlign="center" bgcolor="grey.200">
+        <Link href={'/privacy-policy'} aria-label={'Privacy Policy Link'}>Privacy Policy</Link>
+        <Typography variant="body2">© 2024 GoCleaner. All rights reserved.</Typography>
+      </Box>
     </div>
   );
 }

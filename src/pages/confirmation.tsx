@@ -3,6 +3,7 @@ import Head from "next/head";
 import PageLayout from "./layout";
 import { contactPhoneNumber } from "@/constants";
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 const ConfirmationPage = () => {
   return (
@@ -11,12 +12,7 @@ const ConfirmationPage = () => {
         <title>GoCleaner | Order Confirmation</title>
         <meta name="description" content="Thank you for your order!" />
       </Head>
-      <img
-        src="/logo.png"
-        alt="Go Cleaner Logo"
-        width={"300"}
-        className={"logo"}
-      />
+      <Logo />
       <div className={"confirmationPage"}>
         <h2>Thank you!</h2>
         <p>Your order has been successfully placed.</p>

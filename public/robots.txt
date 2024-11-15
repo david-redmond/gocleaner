@@ -1,0 +1,23 @@
+# Allow all user agents to crawl the main site
+User-agent: *
+Allow: /
+
+# Block unnecessary directories to prevent indexing of admin areas and sensitive files
+Disallow: /wp-admin/
+Disallow: /login/
+Disallow: /checkout/
+Disallow: /user-data/
+Disallow: /static/
+Disallow: /scripts/
+Disallow: /css/
+Disallow: /cgi-bin/
+
+# Block specific file types that don’t need to be indexed
+Disallow: /*.pdf$
+Disallow: /*.zip$
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+
+# Sitemap location to ensure crawlers know where to find the sitemap for better indexing
+Sitemap: https://www.gocleaner.ie/sitemap.xml

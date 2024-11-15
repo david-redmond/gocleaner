@@ -1,10 +1,11 @@
 import React from 'react';
 import {areasCovered} from "@/constants";
+import Logo from "@/components/logo";
 
 export default () => {
     return (
         <section>
-            <img src={'./logo.png'} className={'logo'} width={300}/>
+            <Logo />
             <div className="hero">
                 <div>
                     <div className={'heroText'}>Professional Home Cleaning</div>
