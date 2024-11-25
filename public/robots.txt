@@ -11,6 +11,7 @@ Disallow: /static/
 Disallow: /scripts/
 Disallow: /css/
 Disallow: /cgi-bin/
+Disallow: /confirmation/
 
 # Block specific file types that don’t need to be indexed
 Disallow: /*.pdf$
@@ -20,4 +21,4 @@ Disallow: /*.xml$
 Disallow: /*.txt$
 
 # Sitemap location to ensure crawlers know where to find the sitemap for better indexing
-Sitemap: https://www.gocleaner.ie/sitemap.xml
+Sitemap: https://gocleaner.ie/sitemap.xml

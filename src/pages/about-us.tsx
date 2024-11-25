@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 const AboutPage: React.FC = () => {
   return (
     <>
-      <HeadSection />
+      <HeadSection canonical={'https://gocleaner.ie/about-us'} />
       <div className={"container"}>
         <h1>About Us</h1>
         <p>

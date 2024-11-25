@@ -6,7 +6,7 @@ import {contactPhoneNumber} from "@/constants";
 const PrivacyPolicy = () => {
   return (
     <>
-      <HeadSection />
+      <HeadSection canonical={'https://gocleaner.ie/privacy-policy'}/>
       <div className={"container"}>
         <h1>Privacy Policy for GoCleaner</h1>
         <p>

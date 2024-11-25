@@ -3,12 +3,13 @@ import React from "react";
 import Head from "next/head";
 import { areasCovered } from "@/constants";
 import Logo from "@/components/logo";
-const HeadSection = ({ floatNav = false }) => {
+const HeadSection = ({ floatNav = false, canonical}: {floatNav?: boolean, canonical: string}) => {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="canonical" href={canonical} />
 
         <title>GoCleaner | Professional residential cleaners</title>
         <meta

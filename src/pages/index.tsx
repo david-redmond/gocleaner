@@ -99,7 +99,7 @@ export default function Home() {
 
   return (
     <>
-      <HeadSection floatNav/>
+      <HeadSection floatNav canonical={'https://gocleaner.ie/'}/>
       <HeroSection />
       <div className={"container"}>
         <div className={"form"}>
