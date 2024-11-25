@@ -5,7 +5,6 @@ import Logo from "@/components/logo";
 export default () => {
     return (
         <section>
-            <Logo />
             <div className="hero">
                 <div>
                     <div className={'heroText'}>Professional Home Cleaning</div>

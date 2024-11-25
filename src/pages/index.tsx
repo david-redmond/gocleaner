@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import PageLayout from './layout';
+import HeadSection from '@/components/Head';
 import HomeSection from "@/components/HomeSection";
 import HeroSection from "@/components/HeroSection";
 import DiscountsSection from "@/components/DiscountsSection";
@@ -16,6 +16,7 @@ import KitchenOutlinedIcon from "@mui/icons-material/KitchenOutlined";
 import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
 import BlindsOutlinedIcon from "@mui/icons-material/BlindsOutlined";
 import Timeslot from "@/components/Timeslot";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const extrasArray: IExtras[] = [
@@ -97,7 +98,8 @@ export default function Home() {
   };
 
   return (
-    <PageLayout>
+    <>
+      <HeadSection floatNav/>
       <HeroSection />
       <div className={"container"}>
         <div className={"form"}>
@@ -145,6 +147,7 @@ export default function Home() {
           />
         </div>
       </div>
-    </PageLayout>
+      <Footer />
+    </>
   );
 }

@@ -3,6 +3,7 @@ import SentimentNeutralTwoToneIcon from "@mui/icons-material/SentimentNeutralTwo
 import { IFrequency, IPropertyState } from "@/app/interfaces";
 import calculateSubtotal from "@/app/utils/calculateSubtotal";
 import discounts from "@/app/utils/discounts";
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
 
 interface IProps {
   property: IPropertyState;
@@ -11,15 +12,24 @@ interface IProps {
 }
 export default ({ property, frequency, setFrequency }: IProps) => {
   const SubTotal = calculateSubtotal(property, frequency);
+  const events = (value: string | number) => analyticsEventTracking({
+    action: 'button_click',
+    category: 'User Interaction',
+    label: `setFrequency`,
+    value,
+  });
   return (
     <section className={"section"}>
-      <h2>Discounts</h2>
+      <h2 className={"h2-accent"}>Discounts</h2>
       <div className={"radioGroup"}>
         <div
           className={
             frequency === "once-off" ? "radioLabel selected" : "radioLabel"
           }
-          onClick={() => setFrequency("once-off")}
+          onClick={() => {
+            setFrequency("once-off");
+            events("once-off");
+          }}
         >
           <SentimentNeutralTwoToneIcon className={"icon yellow"} />
           <div className={"radioFrequency"}>One time cleaning</div>
@@ -31,7 +41,10 @@ export default ({ property, frequency, setFrequency }: IProps) => {
           className={
             frequency === "onceWeek" ? "radioLabel selected" : "radioLabel"
           }
-          onClick={() => setFrequency("onceWeek")}
+          onClick={() => {
+            setFrequency("onceWeek");
+            events("onceWeek");
+          }}
         >
           <div className={"radioDiscount radioDiscountHighlight"}>
             -{discounts.onceWeek}%
@@ -45,7 +58,10 @@ export default ({ property, frequency, setFrequency }: IProps) => {
           className={
             frequency === "twiceWeek" ? "radioLabel selected" : "radioLabel"
           }
-          onClick={() => setFrequency("twiceWeek")}
+          onClick={() => {
+            setFrequency("twiceWeek");
+            events("twiceWeek");
+          }}
         >
           <div className={"radioDiscount"}>-{discounts.twiceWeek}%</div>
           <div className={"radioFrequency"}>Every second week</div>
@@ -57,7 +73,10 @@ export default ({ property, frequency, setFrequency }: IProps) => {
           className={
             frequency === "onceMonth" ? "radioLabel selected" : "radioLabel"
           }
-          onClick={() => setFrequency("onceMonth")}
+          onClick={() => {
+            setFrequency("onceMonth");
+            events("onceMonth");
+          }}
         >
           <div className={"radioDiscount"}>-{discounts.onceMonth}%</div>
           <div className={"radioFrequency"}>Once a month</div>

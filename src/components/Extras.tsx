@@ -1,5 +1,6 @@
 import React from "react";
 import {IExtras} from "@/app/interfaces";
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
 
 interface IProps {
     allExtras: IExtras[];
@@ -8,7 +9,7 @@ interface IProps {
 export default ({ allExtras, handleSelectExtra }: IProps) => {
   return (
     <section className={"section"}>
-      <h2>Extras</h2>
+      <h2 className={"h2-accent"}>Extras</h2>
       <div className={"extras-box"}>
         {allExtras.map((opt) => {
           return (
@@ -18,7 +19,15 @@ export default ({ allExtras, handleSelectExtra }: IProps) => {
                   : "extras-option"
               }
               key={opt.name}
-              onClick={() => handleSelectExtra(opt)}
+              onClick={() => {
+                  analyticsEventTracking({
+                      action: 'button_click',
+                      category: 'User Interaction',
+                      label: opt.selected ? `deselectOption` : "selectOption",
+                      value: opt.name,
+                  });
+                  handleSelectExtra(opt);
+              }}
             >
               {opt.icon}
               <p>{opt.name}</p>

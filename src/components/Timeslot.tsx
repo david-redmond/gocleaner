@@ -1,5 +1,6 @@
 import React from "react";
 import { IFrequency } from "@/app/interfaces";
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
 
 interface IProps {
   time: string;
@@ -12,7 +13,7 @@ interface IProps {
 function Timeslot({ time, setTime, frequency, day, setDay }: IProps) {
   return (
     <section className={"section"}>
-      <h2>Pick a time</h2>
+      <h2 className={"h2-accent"}>Pick a time</h2>
       <div className={"grid"}>
         {frequency === "once-off" ? (
           <div className={"inputGroup"}>
@@ -28,7 +29,15 @@ function Timeslot({ time, setTime, frequency, day, setDay }: IProps) {
               required
               className="select"
               value={day}
-              onChange={(e) => setDay(e.target.value)}
+              onChange={(e) => {
+                setDay(e.target.value);
+                analyticsEventTracking({
+                  action: 'button_click',
+                  category: 'User Interaction',
+                  label: `setDay`,
+                  value: e.target.value,
+                });
+              }}
               aria-label="Select a day of the week when the cleaning should take place."
             >
               <option value="Monday">Monday</option>
@@ -49,7 +58,15 @@ function Timeslot({ time, setTime, frequency, day, setDay }: IProps) {
             required
             className="select"
             value={time}
-            onChange={(e) => setTime(e.target.value)}
+            onChange={(e) => {
+              setTime(e.target.value);
+              analyticsEventTracking({
+                action: 'button_click',
+                category: 'User Interaction',
+                label: `setTime`,
+                value: e.target.value,
+              });
+            }}
             aria-label="Select a time slot"
           >
             <option value="8:00">8:00</option>

@@ -2,6 +2,8 @@ import React from "react";
 import { IExtras, IFrequency, IPropertyState } from "@/app/interfaces";
 import calculateSubtotal from "@/app/utils/calculateSubtotal";
 import { useRouter } from 'next/navigation';
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
+import {checkoutEndpoint} from "@/constants";
 
 interface IProps {
   property: IPropertyState;
@@ -53,28 +55,25 @@ function QuoteSummary({
       }
 
       const result = await response.json(); // Parse the JSON response
-      router.push('/confirmation');
+      router.push(`/confirmation?orderRef=${result.orderRef}`);
       return result; // Return the result
     } catch (error) {
       console.error('Error:', error); // Log any errors
     }
-  }
-  const handleSubmitOrder = async () => {
-    if (!user.email || !user.phone || !user.firstname || !user.surname) {
-      return;
-    }
+  };
 
+  const GenerateOrderDetails = () => {
     const additionalOptions = allExtras
-      .map((opt) => {
-        if (opt.selected) {
-          return {
-            name: opt.name,
-            price: opt.price,
-          };
-        }
-      })
-      .filter((opt) => !!opt);
-    const orderPayload = {
+        .map((opt) => {
+          if (opt.selected) {
+            return {
+              name: opt.name,
+              price: opt.price,
+            };
+          }
+        })
+        .filter((opt) => !!opt);
+    return {
       orderType: "services",
       fulfilmentType: "delivery",
       paymentMethod: "cash",
@@ -101,16 +100,27 @@ function QuoteSummary({
         total: Number(total).toFixed(2),
       },
     };
-    console.log("Order **********");
-    console.log(orderPayload);
-    console.log("Order END **********");
+  }
+  const handleSubmitOrder = async () => {
+    if (!user.email || !user.phone || !user.firstname || !user.surname) {
+      return;
+    }
 
-    await postData('https://gateway.project-frida.online/storefront/gocleaner/checkout', orderPayload)
+
+    const orderPayload = GenerateOrderDetails();
+    analyticsEventTracking({
+      action: 'purchase',
+      category: 'Ecommerce',
+      label: 'Product Purchase',
+      value: orderPayload.basket.total,
+    });
+    await postData(checkoutEndpoint, orderPayload);
+
   };
 
   return (
     <section className={"section"}>
-      <h2>Your Quote</h2>
+      <h2 className={"h2-accent"}>Your Quote</h2>
       <div className={"quoteBox"}>
         {frequency === "once-off" ? (
           <p>Your cleaning is scheduled for Dec 20th, 11:00am</p>
@@ -153,13 +163,29 @@ function QuoteSummary({
             type="text"
             placeholder={"First name"}
             value={user.firstname}
-            onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+            onChange={(e) => {
+              setUser({ ...user, firstname: e.target.value });
+              analyticsEventTracking({
+                action: 'input_change',
+                category: 'User Interaction',
+                label: `firstname`,
+                value: e.target.value,
+              });
+            }}
           />
           <input
             type="text"
             placeholder={"Surname"}
             value={user.surname}
-            onChange={(e) => setUser({ ...user, surname: e.target.value })}
+            onChange={(e) => {
+              setUser({ ...user, surname: e.target.value });
+              analyticsEventTracking({
+                action: 'input_change',
+                category: 'User Interaction',
+                label: `surname`,
+                value: e.target.value,
+              });
+            }}
           />
         </div>
         <div className={"userInputGroup"}>
@@ -167,13 +193,29 @@ function QuoteSummary({
             type="tel"
             placeholder={"Phone no."}
             value={user.phone}
-            onChange={(e) => setUser({ ...user, phone: e.target.value })}
+            onChange={(e) => {
+              setUser({ ...user, phone: e.target.value });
+              analyticsEventTracking({
+                action: 'input_change',
+                category: 'User Interaction',
+                label: `phone`,
+                value: e.target.value,
+              });
+            }}
           />
           <input
             type="email"
             placeholder={"Email"}
             value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            onChange={(e) => {
+              setUser({ ...user, email: e.target.value })
+              analyticsEventTracking({
+                action: 'input_change',
+                category: 'User Interaction',
+                label: `email`,
+                value: e.target.value,
+              });
+            }}
           />
         </div>
         <button

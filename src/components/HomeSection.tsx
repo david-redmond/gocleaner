@@ -1,6 +1,7 @@
 import React from "react";
 import { IFrequency, IPropertyState } from "@/app/interfaces";
 import RoomSelector from "./RoomSelector";
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
 
 interface IProps {
   property: IPropertyState;
@@ -18,7 +19,7 @@ export default ({
 }: IProps) => {
   return (
     <section className={"section"}>
-      <h2>Your Home</h2>
+      <h2 className={"h2-accent"}>Your Home</h2>
       <div className={"grid"}>
         <RoomSelector
           title={"Bedrooms"}
@@ -44,6 +45,12 @@ export default ({
           onChange={(e: any) => {
             const { value } = e.target;
             setEircode(value);
+            analyticsEventTracking({
+              action: "input_change",
+              category: "User Interaction",
+              label: "eircode",
+              value: value,
+            });
           }}
         />
       </div>
@@ -57,7 +64,15 @@ export default ({
               ? "inputGroup inputGroup-selected"
               : "inputGroup"
           }
-          onClick={() => setProperty({ ...property, type: "house" })}
+          onClick={() => {
+            setProperty({ ...property, type: "house" });
+            analyticsEventTracking({
+              action: "button_click",
+              category: "User Interaction",
+              label: "selectProperty",
+              value: "house",
+            });
+          }}
         >
           House
         </div>
@@ -67,7 +82,15 @@ export default ({
               ? "inputGroup inputGroup-selected"
               : "inputGroup"
           }
-          onClick={() => setProperty({ ...property, type: "apt" })}
+          onClick={() => {
+            setProperty({ ...property, type: "apt" });
+            analyticsEventTracking({
+              action: "button_click",
+              category: "User Interaction",
+              label: "selectProperty",
+              value: "apt",
+            });
+          }}
         >
           Apartment
         </div>
@@ -80,6 +103,12 @@ export default ({
           onClick={() => {
             setProperty({ ...property, type: "moving" });
             setFrequency("once-off");
+            analyticsEventTracking({
+              action: "button_click",
+              category: "User Interaction",
+              label: "selectProperty",
+              value: "moving",
+            });
           }}
         >
           Moving Out

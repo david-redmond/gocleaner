@@ -1,18 +1,11 @@
-"use client";
 import "../app/globals.css";
 import React from "react";
 import Head from "next/head";
 import { areasCovered } from "@/constants";
-import Link from "next/link";
-import {Box, Typography} from "@mui/material";
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+import Logo from "@/components/logo";
+const HeadSection = ({ floatNav = false }) => {
   return (
-    <div style={{ position: "relative" }}>
+    <>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,13 +52,7 @@ export default function RootLayout({
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-0RF7HF43FN"
         ></script>
-        {`<script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-0RF7HF43FN');
-        </script>`}
+        <script async src={'/initGa.js'}></script>
 
         {/* Structured Data */}
         {`<script type="application/ld+json">
@@ -85,11 +72,13 @@ export default function RootLayout({
           }
         </script>`}
       </Head>
-      {children}
-      <Box component="footer" py={4} textAlign="center" bgcolor="grey.200">
-        <Link href={'/privacy-policy'} aria-label={'Privacy Policy Link'}>Privacy Policy</Link>
-        <Typography variant="body2">© 2024 GoCleaner. All rights reserved.</Typography>
-      </Box>
-    </div>
+      <nav className={floatNav ? "navbar navbar-float" : "navbar"}>
+        <div className="navbar-container">
+          <Logo />
+        </div>
+      </nav>
+    </>
   );
-}
+};
+
+export default HeadSection;

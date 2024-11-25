@@ -1,6 +1,7 @@
 import React from "react";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import analyticsEventTracking from "@/app/utils/analyticsEventTracking";
 
 interface IProps {
   value: number;
@@ -14,11 +15,24 @@ const RoomSelector = ({ value, setRooms, title, autofocus }: IProps) => {
   // Function to increment rooms
   const incrementRooms = () => {
     setRooms(value + 1);
+    analyticsEventTracking({
+      action: 'button_click',
+      category: 'User Interaction',
+      label: `incrementRooms${title}`,
+      value: value + 1,
+    });
   };
 
   // Function to decrement rooms
   const decrementRooms = () => {
-    setRooms(value > 1 ? value - 1 : 1); // Ensure it doesn't go below 1
+    const newValue = value > 1 ? value - 1 : 1
+    setRooms(newValue); // Ensure it doesn't go below 1
+    analyticsEventTracking({
+      action: 'button_click',
+      category: 'User Interaction',
+      label: `decrement${title}`,
+      value: newValue,
+    });
   };
 
   // Handle keyboard interactions for accessibility
