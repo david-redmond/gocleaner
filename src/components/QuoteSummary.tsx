@@ -38,7 +38,7 @@ function QuoteSummary({
     setIsDisabled(
       !user.email || !user.phone || !user.firstname || !user.surname,
     );
-  });
+  },  [SubTotal.subtotal, totalExtras, user.email, user.phone, user.firstname, user.surname]);
 
   async function postData(url = '', data = {}) {
     try {

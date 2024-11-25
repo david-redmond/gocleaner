@@ -1,6 +1,5 @@
 import React from 'react';
 import {areasCovered} from "@/constants";
-import Logo from "@/components/logo";
 
 export default () => {
     return (
