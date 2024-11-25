@@ -6,7 +6,7 @@ const Logo = ({isFloatingLogo = false}) => {
   return (
       <Link href={"/"}>
         <Image
-          src={"./logo.png"}
+          src={"/logo.png"}
           className={isFloatingLogo ? "logo logo-float" : "logo"}
           width={200}
           height={112}

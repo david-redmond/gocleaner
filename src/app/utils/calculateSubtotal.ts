@@ -9,12 +9,12 @@ interface IResult {
   subtotal: number;
 }
 export default (property: IPropertyState, frequency: IFrequency): IResult => {
-  const basicNumber = 130;
+  const basicNumber = 85;
   let onceOffPrice = basicNumber;
   const extraRooms = property.bath + property.bed - 2;
 
   if (extraRooms > 0) {
-    onceOffPrice = basicNumber + extraRooms * 20;
+    onceOffPrice = basicNumber + extraRooms * 15;
   }
 
   const priceObject = {
