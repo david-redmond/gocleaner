@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export function middleware(req) {
+export function middleware(req: any) {
     if (process.env.NODE_ENV === 'development') {
         return NextResponse.next();
     }
