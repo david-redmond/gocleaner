@@ -6,8 +6,8 @@ export default () => {
         <section>
             <div className="hero">
                 <div>
-                    <div className={'heroText'}>Professional Home Cleaning</div>
-                    <div className={'heroSubtext'}>{areasCovered}</div>
+                    <h1 className={'heroText'}>Professional Home Cleaning</h1>
+                    <h2 className={'heroSubtext'}>{areasCovered}</h2>
                 </div>
             </div>
         </section>

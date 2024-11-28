@@ -21,6 +21,22 @@ export default ({
     <section className={"section"}>
       <h2 className={"h2-accent"}>Your Home</h2>
       <div className={"grid"}>
+        <input
+            type="text"
+            value={eircode}
+            className={eircode.length < 6 ? "inputGroup eircodeMissing" : "inputGroup"}
+            placeholder={"Enter your eircode"}
+            onChange={(e: any) => {
+              const { value } = e.target;
+              setEircode(value);
+              analyticsEventTracking({
+                action: "input_change",
+                category: "User Interaction",
+                label: "eircode",
+                value: value,
+              });
+            }}
+        />
         <RoomSelector
           title={"Bedrooms"}
           value={property.bed}
@@ -35,23 +51,6 @@ export default ({
           setRooms={(newValue: number) =>
             setProperty({ ...property, bath: newValue })
           }
-        />
-        <input
-          type="text"
-          value={eircode}
-          className={"inputGroup"}
-          placeholder={"Enter your eircode"}
-          autoFocus
-          onChange={(e: any) => {
-            const { value } = e.target;
-            setEircode(value);
-            analyticsEventTracking({
-              action: "input_change",
-              category: "User Interaction",
-              label: "eircode",
-              value: value,
-            });
-          }}
         />
       </div>
       <div className={"propertyText"}>

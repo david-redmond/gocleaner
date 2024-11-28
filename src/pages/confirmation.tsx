@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 const ConfirmationPage = () => {
   const searchParams = useSearchParams();
   // @ts-expect-error could be null
-  const orderRef = searchParams.get("orderref");
+  const orderRef = searchParams.get("orderRef");
   return (
     <>
       <Head>
