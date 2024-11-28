@@ -11,7 +11,7 @@ const AboutPage: React.FC = () => {
         <h1>About Us</h1>
         <p>
           Welcome to GoCleaner, your reliable choice for residential cleaning
-          across Kildare, Dublin, Carlow, Laois, Offaly, and Meath. We
+          across Kildare, Dublin, Laois, Offaly, and Meath. We
           understand that finding a house cleaner you can trust is essential,
           and we’re here to make the process as easy and transparent as
           possible.
@@ -39,7 +39,7 @@ const AboutPage: React.FC = () => {
         <br/>
         <p>
           Discover the difference a local cleaning company can make. We’re here
-          to provide residents of Kildare, Dublin, Carlow, Laois, Offaly, and
+          to provide residents of Kildare, Dublin, Laois, Offaly, and
           Meath with a cleaner home and peace of mind—on your terms and without
           any upfront costs.
         </p>

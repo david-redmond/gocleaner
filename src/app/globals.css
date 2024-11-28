@@ -104,6 +104,13 @@ body {
   padding: 14px;
   flex: 1;
 }
+.eircodeMissing {
+  border: 2px solid red;
+  background-color: #f19595;
+}
+.eircodeMissing::placeholder {
+  color: var(--text-color);
+}
 .dateInputGroup {
   display: flex;
   flex-direction: row;
