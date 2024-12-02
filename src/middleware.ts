@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req: any) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_DISABLE_REDIRECT) {
         return NextResponse.next();
     }
     // Check if the request is over HTTP

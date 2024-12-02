@@ -39,7 +39,7 @@ body {
 }
 
 .hero {
-  background: url("/hero-1.png") center no-repeat;
+  background: url("/hero.png") center no-repeat;
   height: 800px;
   width: 100%;
   background-size: cover;
@@ -360,7 +360,11 @@ body {
     flex: 1 0 calc(30% - 10px); /* 3 items on tablet */
   }
 }
-
+@media (max-width: 768px) {
+  .hero {
+    background: url("/hero-mobile.png") center no-repeat;
+  }
+}
 /* Mobile  */
 @media (max-width: 768px) {
   .radioGroup {
