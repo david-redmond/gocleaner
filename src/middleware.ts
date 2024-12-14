@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req: any) {
-    // if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_DISABLE_REDIRECT) {
-    //     return NextResponse.next();
-    // }
+    if (process.env.REACT_APP_DISABLE_REDIRECT) {
+        return NextResponse.next();
+    }
     // Check if the request is over HTTP
     const url = req.nextUrl.clone();
     if (url.protocol === 'http:') {
@@ -17,6 +17,6 @@ export function middleware(req: any) {
 }
 
 // Optionally, you can specify the paths the middleware should run on
-export const config = {
-    matcher: ['/'],
-};
+// export const config = {
+//     // matcher: ['*'],
+// };
