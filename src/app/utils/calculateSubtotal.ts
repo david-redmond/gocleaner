@@ -7,14 +7,20 @@ interface IResult {
   twiceWeek: number;
   onceMonth: number;
   subtotal: number;
+  hours: number;
 }
 export default (property: IPropertyState, frequency: IFrequency): IResult => {
+  const basicHours = 3;
   const basicNumber = 85;
   let onceOffPrice = basicNumber;
+  let hours = basicHours;
   const extraRooms = property.bath + property.bed - 2;
 
   if (extraRooms > 0) {
-    onceOffPrice = basicNumber + extraRooms * 15;
+    onceOffPrice = basicNumber + extraRooms * 5;
+  }
+  if (extraRooms > 4) {
+    hours = basicHours + extraRooms * 0.25;
   }
 
   const priceObject = {
@@ -22,6 +28,7 @@ export default (property: IPropertyState, frequency: IFrequency): IResult => {
     onceWeek: onceOffPrice * ((100 - discounts.onceWeek) / 100),
     twiceWeek: onceOffPrice * ((100 - discounts.twiceWeek) / 100),
     onceMonth: onceOffPrice * ((100 - discounts.onceMonth) / 100),
+    hours
   };
 
   switch (frequency) {

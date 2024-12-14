@@ -6,7 +6,7 @@ type IDiscounts = {
 
 const discounts: IDiscounts = {
     "once-off": 0,
-    onceWeek: 15,
+    onceWeek: 20,
     twiceWeek: 10,
     onceMonth: 5
 }

@@ -24,6 +24,7 @@ function QuoteSummary({
   const SubTotal = calculateSubtotal(property, frequency);
   const totalExtras = calculateTotalExtras(allExtras);
   const [total, setTotal] = React.useState(SubTotal.subtotal + totalExtras);
+  const [hours, setHours] = React.useState(SubTotal.hours);
   const [isDisabled, setIsDisabled] = React.useState<boolean>(true);
   const [user, setUser] = React.useState({
     firstname: "",
@@ -35,6 +36,7 @@ function QuoteSummary({
 
   React.useEffect(() => {
     setTotal(SubTotal.subtotal + totalExtras);
+    setHours(SubTotal.hours);
     setIsDisabled(
       !user.email || !user.phone || !user.firstname || !user.surname,
     );
@@ -134,6 +136,7 @@ function QuoteSummary({
             ? `Your Eircode is ${eircode}`
             : "Please add your Eircode above."}
         </p>
+        <p>Estimated duration: {Number(hours).toFixed(1)} Hours.</p>
         <div className={"quoteItem"}>
           <p>
             Full {property.type} cleaning, including {property.bed} Bedrooms and{" "}
@@ -223,7 +226,7 @@ function QuoteSummary({
           className={"submitButton"}
           disabled={isDisabled}
         >
-          Confirm & Pay on the Day
+          Confirm with Free cancellation
         </button>
       </div>
     </section>
